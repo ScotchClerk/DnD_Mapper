@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package mapper;
-
 import java.awt.Color;
 
 /**
  *
- * @author James
+ * @author James Phelan and Michael Phelan
  */
 public class Tolken {//tolkens should be circles or squares to make life ez
 

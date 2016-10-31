@@ -1,9 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package mapper;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -25,8 +19,7 @@ import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 
 /**
- *
- * @author phelanj
+ * @author James Phelan and Michael Phelan
  */
 public class mapPanel extends JPanel implements KeyListener, MouseListener {
 

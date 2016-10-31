@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package mapper;
-
 import java.io.*;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 
 /**
- *
- * @author James
+ * @author James Phelan and Michael Phelan
  */
 public class Character {
 
@@ -361,7 +353,7 @@ public class Character {
                             default:
                                 break;
                         }
-                                
+
                             default:
                                 break;
                         }
