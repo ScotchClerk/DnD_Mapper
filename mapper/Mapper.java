@@ -14,7 +14,7 @@ public class Mapper {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        mapPanel panel = new mapPanel();
+        MapPanel panel = new MapPanel();
 
         JFrame frame = new JFrame("Gam3");
         frame.getContentPane().add(panel);

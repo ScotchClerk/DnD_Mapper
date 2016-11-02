@@ -21,7 +21,7 @@ import static java.lang.Integer.parseInt;
 /**
  * @author James Phelan and Michael Phelan
  */
-public class mapPanel extends JPanel implements KeyListener, MouseListener {
+public class MapPanel extends JPanel implements KeyListener, MouseListener {
 
     int maxTolkens = 8;
     Tolken[] tolkens = new Tolken[maxTolkens];
@@ -45,7 +45,7 @@ public class mapPanel extends JPanel implements KeyListener, MouseListener {
     int roundNumber = 1; //how many rounds has it been?
     int roundProgress = -1;//this is the progress during a round
 
-    public mapPanel() {
+    public MapPanel() {
         this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(1010, 600));
 

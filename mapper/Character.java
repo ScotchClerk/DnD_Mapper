@@ -213,18 +213,25 @@ public class Character {
             switch (Size) {
                 case 1:
                     pw.println("Size = Tiny");
+                    break;
                 case 2:
                     pw.println("Size = Small");
+                    break;
                 case 3:
                     pw.println("Size = Medium");
+                    break;
                 case 4:
                     pw.println("Size = Large");
+                    break;
                 case 6:
                     pw.println("Size = Huge");
+                    break;
                 case 7:
                     pw.println("Size = Gargantuan");
+                    break;
                 default:
                     pw.println("Size = ?");
+                    break;
 
             }
 
