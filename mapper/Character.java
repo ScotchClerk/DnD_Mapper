@@ -6,7 +6,6 @@ import static java.lang.Integer.parseInt;
  * @author James Phelan and Michael Phelan
  */
 public class Character {
-
     private int Level;
     private int MaxHP;
     private int CurrentHP;
@@ -138,7 +137,6 @@ public class Character {
         Race = race;
         Class = CLASS;
         Size = size;
-
     }
 
     Character(String name, int size, int lvl, int maxhp, int currenthp, int ac, int str, int dex, int con, int inte, int wis, int cha,
@@ -232,9 +230,7 @@ public class Character {
                 default:
                     pw.println("Size = ?");
                     break;
-
             }
-
             pw.close();
         } catch (IOException e) {
             System.out.println("nope");

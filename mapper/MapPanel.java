@@ -24,7 +24,6 @@ import static java.lang.Integer.parseInt;
 
 @SuppressWarnings("serial")
 public class MapPanel extends JPanel implements KeyListener, MouseListener {
-
     int maxTolkens = 8;
     Tolken[] tolkens = new Tolken[maxTolkens];
     boolean firstRun = true; //this tells the run stuff to do things the first time but not again (helps with initialization)
