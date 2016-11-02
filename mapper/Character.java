@@ -267,102 +267,144 @@ public class Character {
                         switch (counter) {//assign to variables
                             case 0:
                                 Level = parseInt(s.substring(1));
+                                break;
                             case 1:
                                 MaxHP = parseInt(s.substring(1));
+                                break;
                             case 2:
                                 CurrentHP = parseInt(s.substring(1));
+                                break;
                             case 3:
                                 AC = parseInt(s.substring(1));
+                                break;
                             case 4:
                                 STR = parseInt(s.substring(1));
+                                break;
                             case 5:
                                 DEX = parseInt(s.substring(1));
+                                break;
                             case 6:
                                 CON = parseInt(s.substring(1));
+                                break;
                             case 7:
                                 INT = parseInt(s.substring(1));
+                                break;
                             case 8:
                                 WIS = parseInt(s.substring(1));
+                                break;
                             case 9:
                                 CHA = parseInt(s.substring(1));
+                                break;
                             case 10:
                                 speed = parseInt(s.substring(1));
+                                break;
                             case 11:
                                 initiative = parseInt(s.substring(1));
+                                break;
                             case 12:
                                 Acrobatics = parseBoolean(s.substring(1));
+                                break;
                             case 13:
                                 AnimalHandling = parseBoolean(s.substring(1));
+                                break;
                             case 14:
                                 Arcana = parseBoolean(s.substring(1));
+                                break;
                             case 15:
                                 Athletics = parseBoolean(s.substring(1));
+                                break;
                             case 16:
                                 Deception = parseBoolean(s.substring(1));
+                                break;
                             case 17:
                                 History = parseBoolean(s.substring(1));
+                                break;
                             case 18:
                                 Insight = parseBoolean(s.substring(1));
+                                break;
                             case 19:
                                 Intimidation = parseBoolean(s.substring(1));
+                                break;
                             case 20:
                                 Investigation = parseBoolean(s.substring(1));
+                                break;
                             case 21:
                                 Medicine = parseBoolean(s.substring(1));
+                                break;
                             case 22:
                                 Nature = parseBoolean(s.substring(1));
+                                break;
                             case 23:
                                 Perception = parseBoolean(s.substring(1));
+                                break;
                             case 24:
                                 Performance = parseBoolean(s.substring(1));
+                                break;
                             case 25:
                                 Persuasion = parseBoolean(s.substring(1));
+                                break;
                             case 26:
                                 Religion = parseBoolean(s.substring(1));
+                                break;
                             case 27:
                                 SleightOfHand = parseBoolean(s.substring(1));
+                                break;
                             case 28:
                                 Stealth = parseBoolean(s.substring(1));
+                                break;
                             case 29:
                                 Survival = parseBoolean(s.substring(1));
+                                break;
                             case 30:
                                 STRThrow = parseBoolean(s.substring(1));
+                                break;
                             case 31:
                                 DEXThrow = parseBoolean(s.substring(1));
+                                break;
                             case 32:
                                 CONThrow = parseBoolean(s.substring(1));
+                                break;
                             case 33:
                                 INTThrow = parseBoolean(s.substring(1));
+                                break;
                             case 34:
                                 WISThrow = parseBoolean(s.substring(1));
+                                break;
                             case 35:
                                 CHAThrow = parseBoolean(s.substring(1));
+                                break;
                             case 36:
                                 Race = (s.substring(1));
+                                break;
                             case 37:
                                 Class = (s.substring(1));
+                                break;
                             case 38:
                                 Name = (s.substring(1));
+                                break;
                             case 39:
-                        switch (s.substring(1).toLowerCase()) {
-                            case "tiny":
-                                Size = 1;
-                            case "small":
-                                Size = 2;
-                            case "medium":
-                                Size = 3;
-                            case "large":
-                                Size = 4;
-                            case "huge":
-                                Size = 5;
-                            case "gargantuan":
-                                Size = 6;
-                            default:
-                                break;
-                        }
-
-                            default:
-                                break;
+                                switch (s.substring(1).toLowerCase()) {
+                                    case "tiny":
+                                        Size = 1;
+                                        break;
+                                    case "small":
+                                        Size = 2;
+                                        break;
+                                    case "medium":
+                                        Size = 3;
+                                        break;
+                                    case "large":
+                                        Size = 4;
+                                        break;
+                                    case "huge":
+                                        Size = 5;
+                                        break;
+                                    case "gargantuan":
+                                        Size = 6;
+                                        break;
+                                    default:
+                                        break;
+                                }
                         }
                         s = "";
                     }

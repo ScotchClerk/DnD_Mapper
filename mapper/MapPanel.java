@@ -21,6 +21,8 @@ import static java.lang.Integer.parseInt;
 /**
  * @author James Phelan and Michael Phelan
  */
+
+@SuppressWarnings("serial")
 public class MapPanel extends JPanel implements KeyListener, MouseListener {
 
     int maxTolkens = 8;
@@ -200,6 +202,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 if (t[selectedTolken].getImagePath() != null) {
                     try {//if there is an image attached to the tolken use it
                         BufferedImage image = ImageIO.read(new File(t[selectedTolken].getImagePath()));
+@SuppressWarnings("cast")
                         BufferedImage buffered = (BufferedImage) image;
                         g.drawImage(image, t[selectedTolken].getTrueX() - 4,
                                 t[selectedTolken].getTrueY() - 4,
@@ -218,6 +221,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 if (t[selectedTolken].getImagePath() != null) {
                     try {
                         BufferedImage image = ImageIO.read(new File(t[selectedTolken].getImagePath()));
+@SuppressWarnings("cast")
                         BufferedImage buffered = (BufferedImage) image;
                         g.drawImage(image, t[selectedTolken].getTrueX() - 4,
                                 t[selectedTolken].getTrueY() - 4,
@@ -258,6 +262,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 try {
 
                     BufferedImage image = ImageIO.read(new File(t[selectedTolken].getImagePath()));
+@SuppressWarnings("cast")
                     BufferedImage buffered = (BufferedImage) image;
                     g.drawImage(image, t[selectedTolken].getTrueX() - 4,
                             t[selectedTolken].getTrueY() - 4,
@@ -275,6 +280,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
             } else {
                 try {
                     BufferedImage image = ImageIO.read(new File(t[selectedTolken].getImagePath()));
+@SuppressWarnings("cast")
                     BufferedImage buffered = (BufferedImage) image;
                     g.drawImage(image, t[selectedTolken].getTrueX() - 4,
                             t[selectedTolken].getTrueY() - 4,
@@ -470,7 +476,9 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
     public void mousePressed(MouseEvent e
     ) {
         ///////////////////This is a selection section////////////////////////
+@SuppressWarnings("cast")
         int xGrid = (int) (e.getX() / gridSize); //use these to find the grid x,y
+@SuppressWarnings("cast")
         int yGrid = (int) (e.getY() / gridSize);
 
         if (xGrid == 0 && yGrid == 0) {//selects and uses the new button
@@ -534,8 +542,8 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
         if (e.getButton() == 3) {//if the mouse is right clicked
             if (e.isShiftDown()) {
                 tapeMeasuring = true;
-                initialTapeX = (gridSize) * (int) (e.getX() / (gridSize));//casting to an int then dividing and multiplying to put
-                initialTapeY = (gridSize) * (int) (e.getY() / (gridSize));//us in the middle of a square
+                initialTapeX = (gridSize) * (e.getX() / (gridSize));//casting to an int then dividing and multiplying to put
+                initialTapeY = (gridSize) * (e.getY() / (gridSize));//us in the middle of a square
                 initialTapeX = initialTapeX + (int) (.5 * gridSize);
                 initialTapeY = initialTapeY + (int) (.5 * gridSize);
             } else {
@@ -550,7 +558,9 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
     public void mouseReleased(MouseEvent e
     ) {
         //////////////////////this is a tolken moving section///////////////////////////
+        @SuppressWarnings("cast")
         int xGrid = (int) (e.getX() / gridSize) - jj; //use these to find the grid x,y
+        @SuppressWarnings("cast")
         int yGrid = (int) (e.getY() / gridSize) - kk;
         if (ClickDragControl) {
             tolkens[selectedTolken].setX(xGrid);//moves the selected tolken to where the mouse is released
@@ -563,8 +573,8 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
         if (e.getButton() == 3) {//if the mouse is released
             if (tapeMeasuring) {//this is for tape measuring
                 if (e.isShiftDown()) {//this is the round it off section
-                    finalTapeX = (gridSize) * (int) (e.getX() / (gridSize));//where the mouse is rounded
-                    finalTapeY = (gridSize) * (int) (e.getY() / (gridSize));
+                    finalTapeX = (gridSize) * (e.getX() / (gridSize));//where the mouse is rounded
+                    finalTapeY = (gridSize) * (e.getY() / (gridSize));
                     finalTapeX = finalTapeX + (int) (.5 * gridSize);//this just centers the final points
                     finalTapeY = finalTapeY + (int) (.5 * gridSize);
                 } else {//true value section

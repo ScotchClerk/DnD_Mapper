@@ -114,12 +114,12 @@ public class Tolken {//tolkens should be circles or squares to make life ez
 
     public void setTrueX(int i) {
         trueX = i;
-        x = (int) (i / passedGridSize);
+        x = i / passedGridSize;
     }
 
     public void setTrueY(int i) {
         trueY = i;
-        y = (int) (i / passedGridSize);
+        y = i / passedGridSize;
     }
 
     public void setSize(int i) {
