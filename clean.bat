@@ -1,2 +1,3 @@
-del class\*
+del class\mapper\*
+rmdir class\mapper\
 rmdir class\
