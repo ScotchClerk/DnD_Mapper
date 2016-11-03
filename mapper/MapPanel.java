@@ -1,4 +1,5 @@
 package mapper;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,13 +19,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
+import javax.swing.JMenuItem;
+import java.awt.event.MouseAdapter;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.border.BevelBorder;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 /**
  * @author James Phelan and Michael Phelan
  */
-
 @SuppressWarnings("serial")
 public class MapPanel extends JPanel implements KeyListener, MouseListener {
+
     int maxTolkens = 8;
     Tolken[] tolkens = new Tolken[maxTolkens];
     boolean firstRun = true; //this tells the run stuff to do things the first time but not again (helps with initialization)
@@ -46,6 +55,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
     Tolken[] initiative = new Tolken[maxTolkens];
     int roundNumber = 1; //how many rounds has it been?
     int roundProgress = -1;//this is the progress during a round
+    JPopupMenu popup; //this is the popup menu that lets you change things about stuff
 
     public MapPanel() {
         this.setBackground(Color.WHITE);
@@ -128,29 +138,31 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
             }
         }
     }
-    public void drawRightPane(Graphics g){
-         g.setColor(Color.WHITE);//lots of access to the character linked with the tolkens
-        g.fillRect(this.getWidth()-135, 0, 135, 10000);
+
+    public void drawRightPane(Graphics g) {
+        g.setColor(Color.WHITE);//lots of access to the character linked with the tolkens
+        g.fillRect(this.getWidth() - 135, 0, 135, 10000);
         g.setColor(Color.BLACK);
-        g.drawString("Acrobatics = " + tolkens[selectedTolken].getCharacter().getAcrobatics(), this.getWidth()-130, 15);
-        g.drawString("AnimalHandling = " + tolkens[selectedTolken].getCharacter().getAnimalHandling(), this.getWidth()-130, 30);
-        g.drawString("Arcana = " + tolkens[selectedTolken].getCharacter().getArcana(), this.getWidth()-130, 45);
-        g.drawString("Athletics = " + tolkens[selectedTolken].getCharacter().getAthletics(), this.getWidth()-130, 60);
-        g.drawString("Deception = " + tolkens[selectedTolken].getCharacter().getDeception(), this.getWidth()-130, 75);
-        g.drawString("History = " + tolkens[selectedTolken].getCharacter().getHistory(), this.getWidth()-130, 90);
-        g.drawString("Insight = " + tolkens[selectedTolken].getCharacter().getInsight(), this.getWidth()-130, 105);
-        g.drawString("Intimidation = " + tolkens[selectedTolken].getCharacter().getIntimidation(), this.getWidth()-130, 120);
-        g.drawString("Investigation = " + tolkens[selectedTolken].getCharacter().getInvestigation(), this.getWidth()-130, 135);
-        g.drawString("Medicine = " + tolkens[selectedTolken].getCharacter().getMedicine(), this.getWidth()-130, 150);
-        g.drawString("Nature = " + tolkens[selectedTolken].getCharacter().getNature(), this.getWidth()-130, 165);
-        g.drawString("Perception = " + tolkens[selectedTolken].getCharacter().getPerception(), this.getWidth()-130, 180);
-        g.drawString("Performance = " + tolkens[selectedTolken].getCharacter().getPerformance(), this.getWidth()-130, 195);
-        g.drawString("Persuasion = " + tolkens[selectedTolken].getCharacter().getPersuasion(), this.getWidth()-130, 210);
-        g.drawString("Religion = " + tolkens[selectedTolken].getCharacter().getReligion(), this.getWidth()-130, 225);
-        g.drawString("SleightOfHand = " + tolkens[selectedTolken].getCharacter().getSleightOfHand(), this.getWidth()-130, 240);
-        g.drawString("Stealth = " + tolkens[selectedTolken].getCharacter().getStealth(), this.getWidth()-130, 255);
-        g.drawString("Survival = " + tolkens[selectedTolken].getCharacter().getSurvival(), this.getWidth()-130, 270);
+        g.drawString("Acrobatics = " + tolkens[selectedTolken].getCharacter().getAcrobatics(), this.getWidth() - 130, 15);
+        g.drawString("AnimalHandling = " + tolkens[selectedTolken].getCharacter().getAnimalHandling(), this.getWidth() - 130, 30);
+        g.drawString("Arcana = " + tolkens[selectedTolken].getCharacter().getArcana(), this.getWidth() - 130, 45);
+        g.drawString("Athletics = " + tolkens[selectedTolken].getCharacter().getAthletics(), this.getWidth() - 130, 60);
+        g.drawString("Deception = " + tolkens[selectedTolken].getCharacter().getDeception(), this.getWidth() - 130, 75);
+        g.drawString("History = " + tolkens[selectedTolken].getCharacter().getHistory(), this.getWidth() - 130, 90);
+        g.drawString("Insight = " + tolkens[selectedTolken].getCharacter().getInsight(), this.getWidth() - 130, 105);
+        g.drawString("Intimidation = " + tolkens[selectedTolken].getCharacter().getIntimidation(), this.getWidth() - 130, 120);
+        g.drawString("Investigation = " + tolkens[selectedTolken].getCharacter().getInvestigation(), this.getWidth() - 130, 135);
+        g.drawString("Medicine = " + tolkens[selectedTolken].getCharacter().getMedicine(), this.getWidth() - 130, 150);
+        g.drawString("Nature = " + tolkens[selectedTolken].getCharacter().getNature(), this.getWidth() - 130, 165);
+        g.drawString("Perception = " + tolkens[selectedTolken].getCharacter().getPerception(), this.getWidth() - 130, 180);
+        g.drawString("Performance = " + tolkens[selectedTolken].getCharacter().getPerformance(), this.getWidth() - 130, 195);
+        g.drawString("Persuasion = " + tolkens[selectedTolken].getCharacter().getPersuasion(), this.getWidth() - 130, 210);
+        g.drawString("Religion = " + tolkens[selectedTolken].getCharacter().getReligion(), this.getWidth() - 130, 225);
+        g.drawString("SleightOfHand = " + tolkens[selectedTolken].getCharacter().getSleightOfHand(), this.getWidth() - 130, 240);
+        g.drawString("Stealth = " + tolkens[selectedTolken].getCharacter().getStealth(), this.getWidth() - 130, 255);
+        g.drawString("Survival = " + tolkens[selectedTolken].getCharacter().getSurvival(), this.getWidth() - 130, 270);
     }
+
     public String convertSize(int size) {
         switch (size) {
             case 1:
@@ -202,7 +214,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 if (t[selectedTolken].getImagePath() != null) {
                     try {//if there is an image attached to the tolken use it
                         BufferedImage image = ImageIO.read(new File(t[selectedTolken].getImagePath()));
-@SuppressWarnings("cast")
+                        @SuppressWarnings("cast")
                         BufferedImage buffered = (BufferedImage) image;
                         g.drawImage(image, t[selectedTolken].getTrueX() - 4,
                                 t[selectedTolken].getTrueY() - 4,
@@ -221,7 +233,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 if (t[selectedTolken].getImagePath() != null) {
                     try {
                         BufferedImage image = ImageIO.read(new File(t[selectedTolken].getImagePath()));
-@SuppressWarnings("cast")
+                        @SuppressWarnings("cast")
                         BufferedImage buffered = (BufferedImage) image;
                         g.drawImage(image, t[selectedTolken].getTrueX() - 4,
                                 t[selectedTolken].getTrueY() - 4,
@@ -262,7 +274,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 try {
 
                     BufferedImage image = ImageIO.read(new File(t[selectedTolken].getImagePath()));
-@SuppressWarnings("cast")
+                    @SuppressWarnings("cast")
                     BufferedImage buffered = (BufferedImage) image;
                     g.drawImage(image, t[selectedTolken].getTrueX() - 4,
                             t[selectedTolken].getTrueY() - 4,
@@ -280,7 +292,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
             } else {
                 try {
                     BufferedImage image = ImageIO.read(new File(t[selectedTolken].getImagePath()));
-@SuppressWarnings("cast")
+                    @SuppressWarnings("cast")
                     BufferedImage buffered = (BufferedImage) image;
                     g.drawImage(image, t[selectedTolken].getTrueX() - 4,
                             t[selectedTolken].getTrueY() - 4,
@@ -387,19 +399,19 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 tolkens[selectedTolken].setIsSelected(false);//deselectes previous tolken
                 selectedTolken = selectedTolken + 1;
                 tolkens[selectedTolken].setIsSelected(true);//selectes next tolken
-                repaint();
+
             } else {
                 tolkens[selectedTolken].setIsSelected(false);//deselectes previous tolken
                 selectedTolken = 0;
                 tolkens[selectedTolken].setIsSelected(true);//selectes next tolken
             }
+            repaint();
         }
         if (key == KeyEvent.VK_R) {
             if (selectedTolken > 0) {
                 tolkens[selectedTolken].setIsSelected(false);//deselectes previous tolken
                 selectedTolken = selectedTolken - 1;//arrays start at 0 but this returns #of entries therefore -1
                 tolkens[selectedTolken].setIsSelected(true);//selectes next tolken
-                repaint();
             } else {
                 tolkens[selectedTolken].setIsSelected(false);//deselectes previous tolken
                 selectedTolken = activeTolkens; //arrays start at 0 but this returns #of entries therefore -1
@@ -458,7 +470,49 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 }
             });
         }
+        if (key == KeyEvent.VK_P) {
+            popup = new JPopupMenu();
+            
+            JFrame f = new JFrame("Modification Screen");
+            Dimension d = new Dimension(200,200);
+            f.setPreferredSize(d);
+            
+            f.getContentPane().add(popup);
+            f.pack();
+            f.setVisible(true);
+            
+            ActionListener menuListener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Popup menu item ["
+                            + e.getActionCommand() + "] was pressed.");
+                }
+            };
+            JMenuItem item;
+            
+            popup.add(item = new JMenuItem("Left", new ImageIcon("1.gif")));
+            item.setHorizontalTextPosition(JMenuItem.RIGHT);
+            item.addActionListener(menuListener);
+            popup.add(item = new JMenuItem("Center", new ImageIcon("2.gif")));
+            item.setHorizontalTextPosition(JMenuItem.RIGHT);
+            item.addActionListener(menuListener);
+            popup.add(item = new JMenuItem("Right", new ImageIcon("3.gif")));
+            item.setHorizontalTextPosition(JMenuItem.RIGHT);
+            item.addActionListener(menuListener);
+            popup.add(item = new JMenuItem("Full", new ImageIcon("4.gif")));
+            item.setHorizontalTextPosition(JMenuItem.RIGHT);
+            item.addActionListener(menuListener);
+            popup.addSeparator();
+            popup.add(item = new JMenuItem("Settings . . ."));
+            item.addActionListener(menuListener);
 
+            popup.setLabel("Justification");
+            repaint();
+            //popup.setBorder(new BevelBorder(BevelBorder.RAISED));
+          //popup.addPopupMenuListener(new PopupPrintListener());
+
+          //addMouseListener(new MousePopupListener());
+        }
     }
 
     @Override
@@ -476,9 +530,9 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
     public void mousePressed(MouseEvent e
     ) {
         ///////////////////This is a selection section////////////////////////
-@SuppressWarnings("cast")
+        @SuppressWarnings("cast")
         int xGrid = (int) (e.getX() / gridSize); //use these to find the grid x,y
-@SuppressWarnings("cast")
+        @SuppressWarnings("cast")
         int yGrid = (int) (e.getY() / gridSize);
 
         if (xGrid == 0 && yGrid == 0) {//selects and uses the new button
