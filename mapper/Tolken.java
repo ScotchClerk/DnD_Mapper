@@ -1,3 +1,4 @@
+package mapper;
 import java.awt.Color;
 
 /**

@@ -1,3 +1,4 @@
+package mapper;
 import java.io.*;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
