@@ -495,120 +495,42 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 System.out.println("Popup menu item ["
                         + e.getActionCommand() + "] was pressed.");
 
-                for (int g = 0; g < e.getActionCommand().length() - 1; g++) {//everything after = is important
-                    if (e.getActionCommand().charAt(g) == '-') {
-                        int b = parseInt(e.getActionCommand().substring(0,g));
+                for (int g = 0; g < e.getActionCommand().length() - 1; g++) {//everything before = is important
+                    if (e.getActionCommand().charAt(g) == '~') {
+                        int b = parseInt(e.getActionCommand().substring(0, g));
                         changeSkill(b, tolkens[selectedTolken].getCharacter().getASkill(b));
                     }
                 }
 
-                char letter = e.getActionCommand().charAt(1); // the variables are named for the SECOND letter
-                //YOLO we are doing it the long way
-                if (letter == 't') {
-                    j.setText("New Strength");
-                    f.setPreferredSize(d);
-                    f.getContentPane().add(j);
-                    f.pack();
-                    f.setVisible(true);
-                    j.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (activeTolkens >= 0) {
-                                tolkens[selectedTolken].getCharacter().setSTR(parseInt(j.getText()));
-                                f.setVisible(true);
-                                repaint();
+                for (int g = 0; g < e.getActionCommand().length() - 1; g++) {//everything before ~ is important
+                    if (e.getActionCommand().charAt(g) == '-') {
+                        int b = parseInt(e.getActionCommand().substring(0, g));
+                        j.setText(tolkens[selectedTolken].getCharacter().getAStatName(b));
+                        f.setPreferredSize(d);
+                        f.getContentPane().add(j);
+                        f.pack();
+                        f.setVisible(true);
+                        j.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                if (activeTolkens >= 0) {
+                                    changeStat(b, parseInt(j.getText()));
+                                    f.setVisible(false);
+                                    repaint();
+                                }
                             }
-                        }
-                    });
-                } else if (letter == 'e') {
-                    j.setText("New Dexterity");
-                    f.setPreferredSize(d);
-                    f.getContentPane().add(j);
-                    f.pack();
-                    f.setVisible(true);
-                    j.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (activeTolkens >= 0) {
-                                tolkens[selectedTolken].getCharacter().setDEX(parseInt(j.getText()));
-                                f.setVisible(false);
-                                repaint();
-                            }
-                        }
-                    });
-                } else if (letter == 'o') {
-                    j.setText("New Constitution");
-                    f.setPreferredSize(d);
-                    f.getContentPane().add(j);
-                    f.pack();
-                    f.setVisible(true);
-                    j.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (activeTolkens >= 0) {
-                                tolkens[selectedTolken].getCharacter().setCON(parseInt(j.getText()));
-                                f.setVisible(false);
-                                repaint();
-                            }
-                        }
-                    });
-                } else if (letter == 'n') {
-                    j.setText("New Intellegence");
-                    f.setPreferredSize(d);
-                    f.getContentPane().add(j);
-                    f.pack();
-                    f.setVisible(true);
-                    j.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (activeTolkens >= 0) {
-                                tolkens[selectedTolken].getCharacter().setINT(parseInt(j.getText()));
-                                f.setVisible(false);
-                                repaint();
-                            }
-                        }
-                    });
-                } else if (letter == 'i') {
-                    j.setText("New Wisdom");
-                    f.setPreferredSize(d);
-                    f.getContentPane().add(j);
-                    f.pack();
-                    f.setVisible(true);
-                    j.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (activeTolkens >= 0) {
-                                tolkens[selectedTolken].getCharacter().setWIS(parseInt(j.getText()));
-                                f.setVisible(false);
-                                repaint();
-                            }
-                        }
-                    });
-                } else if (letter == 'h') {
-                    j.setText("New Charisma");
-                    f.setPreferredSize(d);
-                    f.getContentPane().add(j);
-                    f.pack();
-                    f.setVisible(true);
-                    j.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (activeTolkens >= 0) {
-                                tolkens[selectedTolken].getCharacter().setCHA(parseInt(j.getText()));
-                                f.setVisible(false);
-                                repaint();
-                            }
-                        }
-                    });
+                        });
+
+                    }
                 }
             }
-        };
+        };      
         //////////////////////////////BUILDS THE SKILLS MENU///////////////////////
         skillsMenu = new JMenu("Skills");
         skillsMenu.setMnemonic(KeyEvent.VK_A);
         skillsMenu.getAccessibleContext().setAccessibleDescription(
                 "Dropdown menu");
-        if (activeTolkens >= 0) {
+        if (activeTolkens >= 0) {//adds each element of the dropdown
             for (int n = 1; n <= 18; n++) {
                 addSkill(n, menuListener);
             }
@@ -620,55 +542,30 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 "Dropdown menu");
 
         //Makes each element of the dropdown menu
-        //STRENGTH
         if (activeTolkens >= 0) {
-            menuItem = new JMenuItem("Strength: " + tolkens[selectedTolken].getCharacter().getSTR(), KeyEvent.VK_S);
-            menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
-            menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-            menuItem.addActionListener(menuListener);
-            statsMenu.add(menuItem);
-            //DEXTERITY
-            menuItem = new JMenuItem("Dexterity: " + tolkens[selectedTolken].getCharacter().getDEX(), KeyEvent.VK_D);
-            menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
-            menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-            menuItem.addActionListener(menuListener);
-            statsMenu.add(menuItem);
-            //CONSTITUTION
-            menuItem = new JMenuItem("Constitution: " + tolkens[selectedTolken].getCharacter().getCON(), KeyEvent.VK_C);
-            menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
-            menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-            menuItem.addActionListener(menuListener);
-            statsMenu.add(menuItem);
-            //INTELLEGENCE
-            menuItem = new JMenuItem("Intellegence: " + tolkens[selectedTolken].getCharacter().getINT(), KeyEvent.VK_I);
-            menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, ActionEvent.ALT_MASK));
-            menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-            menuItem.addActionListener(menuListener);
-            statsMenu.add(menuItem);
-            //WISDOM
-            menuItem = new JMenuItem("Wisdom: " + tolkens[selectedTolken].getCharacter().getWIS(), KeyEvent.VK_W);
-            menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, ActionEvent.ALT_MASK));
-            menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-            menuItem.addActionListener(menuListener);
-            statsMenu.add(menuItem);
-            //CHARISMA
-            menuItem = new JMenuItem("Charisma: " + tolkens[selectedTolken].getCharacter().getCHA(), KeyEvent.VK_C);
-            menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_6, ActionEvent.ALT_MASK));
-            menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-            menuItem.addActionListener(menuListener);
-            statsMenu.add(menuItem);
+            for (int n = 1; n <= 6; n++) {
+                addStat(n, menuListener);
+            }
         }
         menuBar.add(skillsMenu);
         menuBar.add(statsMenu);
     }
 
     public void addSkill(int s, ActionListener m) {
-        menuItem = new JMenuItem(s + "-" + tolkens[selectedTolken].getCharacter().getASkillName(s) + ": "
+        menuItem = new JMenuItem(s + "~" + tolkens[selectedTolken].getCharacter().getASkillName(s) + ": "
                 + tolkens[selectedTolken].getCharacter().getASkill(s));
         menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
         menuItem.addActionListener(m);
         skillsMenu.add(menuItem);
 
+    }
+
+    public void addStat(int s, ActionListener m) {
+        menuItem = new JMenuItem(s + "-" + tolkens[selectedTolken].getCharacter().getAStatName(s) + ": "
+                + tolkens[selectedTolken].getCharacter().getAStat(s));
+        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
+        menuItem.addActionListener(m);
+        statsMenu.add(menuItem);
     }
 
     public void changeSkill(int s, boolean b) {
@@ -677,6 +574,11 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
         } else {
             tolkens[selectedTolken].getCharacter().setASkill(s, true);
         }
+        repaint();
+    }
+
+    public void changeStat(int s, int b) {
+        tolkens[selectedTolken].getCharacter().setAStat(s, b);
         repaint();
     }
 
@@ -829,8 +731,10 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
             if (firstRun) { //but I only initialize them once so thats why the boolean is here
                 for (int i = 0; i < maxTolkens; i++) {
                     Character C = new Character(); //makes a new blank character for tolkens
-                    initiative[i] = new Tolken(-1, -1, 0, C, Color.BLACK, false, snapToGrid, gridSize);
-                    tolkens[i] = new Tolken(-1, -1, 0, C, Color.BLACK, false, snapToGrid, gridSize);
+                    //initiative[i] = new Tolken(-1, -1, 0, C, Color.BLACK, false, snapToGrid, gridSize);
+                    //tolkens[i] = new Tolken(-1, -1, 0, C, Color.BLACK, false, snapToGrid, gridSize);
+                    initiative[i] = new Tolken(-1, -1, 0, C, false, snapToGrid, gridSize);
+                    tolkens[i] = new Tolken(-1, -1, 0, C, false, snapToGrid, gridSize);
                     //tolkens[i] = new Tolken(-1, -1, 0, C, "C:\\Users\\James\\Pictures\\Wallpaper.png", Color.BLACK, false, snapToGrid, gridSize);//makes initial tolkens
                     tolkens[i].getCharacter().setInitiative(i);
                     if (i == selectedTolken) {//to make sure tolken is created before being modified
