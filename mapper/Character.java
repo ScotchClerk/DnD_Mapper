@@ -417,6 +417,62 @@ public class Character {
         }
     }
 
+    public int getAStat(int i) {
+        switch (i) {
+            case 1:
+                return STR;
+            case 2:
+                return DEX;
+            case 3:
+                return CON;
+            case 4:
+                return INT;
+            case 5:
+                return WIS;
+            case 6:
+                return CHA;
+            default:
+                break;
+        }
+        return 0;
+    }
+
+    public String getAStatName(int i) {
+        switch (i) {
+            case 1:
+                return "Strength";
+            case 2:
+                return "Dexterity";
+            case 3:
+                return "Constitution";
+            case 4:
+                return "Intellegence";
+            case 5:
+                return "Wisdom";
+            case 6:
+                return "Charisma";
+            default:
+                break;
+        }
+        return "?";
+    }
+
+    public void setAStat(int i, int j) {
+        if (i == 1) {
+            STR = j;
+        } else if (i == 2) {
+            DEX = j;
+        } else if (i == 3) {
+            CON = j;
+        } else if (i == 4) {
+            INT = j;
+        } else if (i == 5) {
+            WIS = j;
+        } else if (i == 6) {
+            CHA = j;
+        }
+    }
+
     public boolean getASkill(int i) {
         switch (i) {
             case 1:
@@ -455,6 +511,18 @@ public class Character {
                 return Stealth;
             case 18:
                 return Survival;
+            case 19:
+                return STRThrow;
+            case 20:
+                return DEXThrow;
+            case 21:
+                return CONThrow;
+            case 22:
+                return INTThrow;
+            case 23:
+                return WISThrow;
+            case 24:
+                return CHAThrow;
             default:
                 return false;
         }
@@ -498,6 +566,18 @@ public class Character {
                 return "Stealth";
             case 18:
                 return "Survival";
+            case 19:
+                return "Str throw";
+            case 20:
+                return "Dex throw";
+            case 21:
+                return "Con throw";
+            case 22:
+                return "Int throw";
+            case 23:
+                return "Wis throw";
+            case 24:
+                return "Cha throw";
             default:
                 return "false";
         }
@@ -540,7 +620,18 @@ public class Character {
             Stealth = b;
         } else if (i == 18) {
             Survival = b;
-
+        } else if (i == 19) {
+            STRThrow = b;
+        } else if (i == 20) {
+            DEXThrow = b;
+        } else if (i == 21) {
+            CONThrow = b;
+        } else if (i == 22) {
+            INTThrow = b;
+        } else if (i == 23) {
+            WISThrow = b;
+        } else if (i == 24) {
+            CHAThrow = b;
         }
     }
 
