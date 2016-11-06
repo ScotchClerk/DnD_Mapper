@@ -37,6 +37,23 @@ public class Tolken {//tolkens should be circles or squares to make life ez
         color = COLOR;
         canMove = move;
     }
+    Tolken(int X, int Y, int Size, Character C, boolean move ,boolean snap, int gridsize) {//size should be an integer 1-5ish (thats why I multiply) also x and y snap to the grid
+        if (snap) {
+            trueX = (X * gridsize) + (int) (.25 * gridsize);
+            trueY = (Y * gridsize) + (int) (.25 * gridsize);
+            size = (Size * scale);
+            x = X;
+            y = Y;
+        } else {
+            trueX = X;
+            trueY = Y;
+            size = (Size * scale);
+        }
+        passedGridSize = gridsize;
+        c = C;
+        color = randomColor();
+        canMove = move;
+    }
     Tolken(int X, int Y, int Size, Character C,String imagepath, Color COLOR,boolean move ,boolean snap, int gridsize) {//size should be an integer 1-5ish (thats why I multiply) also x and y snap to the grid
         if (snap) {
             trueX = (X * gridsize) + (int) (.25 * gridsize);
@@ -54,6 +71,14 @@ public class Tolken {//tolkens should be circles or squares to make life ez
         color = COLOR;
         canMove = move;
         imagePath = imagepath;
+    }
+    
+        public Color randomColor(){
+        int r = (int)(Math.random()*255+1);
+        int g = (int)(Math.random()*255+1);
+        int b = (int)(Math.random()*255+1);
+        Color c = new Color(r,g,b);
+        return c;
     }
 
     public void moveRightOne() {//these four functions increment the fake and real x and y to move the tolkens
