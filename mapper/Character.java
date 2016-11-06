@@ -1,4 +1,5 @@
 package mapper;
+
 import java.io.*;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
@@ -7,6 +8,7 @@ import static java.lang.Integer.parseInt;
  * @author James Phelan and Michael Phelan
  */
 public class Character {
+
     private int Level;
     private int MaxHP;
     private int CurrentHP;
@@ -415,6 +417,133 @@ public class Character {
         }
     }
 
+    public boolean getASkill(int i) {
+        switch (i) {
+            case 1:
+                return Acrobatics;
+            case 2:
+                return AnimalHandling;
+            case 3:
+                return Arcana;
+            case 4:
+                return Athletics;
+            case 5:
+                return Deception;
+            case 6:
+                return History;
+            case 7:
+                return Insight;
+            case 8:
+                return Intimidation;
+            case 9:
+                return Investigation;
+            case 10:
+                return Medicine;
+            case 11:
+                return Nature;
+            case 12:
+                return Perception;
+            case 13:
+                return Performance;
+            case 14:
+                return Persuasion;
+            case 15:
+                return Religion;
+            case 16:
+                return SleightOfHand;
+            case 17:
+                return Stealth;
+            case 18:
+                return Survival;
+            default:
+                return false;
+        }
+    }
+
+    public String getASkillName(int i) {
+        switch (i) {
+            case 1:
+                return "Acrobatics";
+            case 2:
+                return "AnimalHandling";
+            case 3:
+                return "Arcana";
+            case 4:
+                return "Athletics";
+            case 5:
+                return "Deception";
+            case 6:
+                return "History";
+            case 7:
+                return "Insight";
+            case 8:
+                return "Intimidation";
+            case 9:
+                return "Investigation";
+            case 10:
+                return "Medicine";
+            case 11:
+                return "Nature";
+            case 12:
+                return "Perception";
+            case 13:
+                return "Performance";
+            case 14:
+                return "Persuasion";
+            case 15:
+                return "Religion";
+            case 16:
+                return "SleightOfHand";
+            case 17:
+                return "Stealth";
+            case 18:
+                return "Survival";
+            default:
+                return "false";
+        }
+    }
+
+    public void setASkill(int i, boolean b) {
+        if (i == 1) {
+            Acrobatics = b;
+        } else if (i == 2) {
+            AnimalHandling = b;
+        } else if (i == 3) {
+            Arcana = b;
+        } else if (i == 4) {
+            Athletics = b;
+        } else if (i == 5) {
+            Deception = b;
+        } else if (i == 6) {
+            History = b;
+        } else if (i == 7) {
+            Insight = b;
+        } else if (i == 8) {
+            Intimidation = b;
+        } else if (i == 9) {
+            Investigation = b;
+        } else if (i == 10) {
+            Medicine = b;
+        } else if (i == 11) {
+            Nature = b;
+        } else if (i == 12) {
+            Perception = b;
+        } else if (i == 13) {
+            Performance = b;
+        } else if (i == 14) {
+            Persuasion = b;
+        } else if (i == 15) {
+            Religion = b;
+        } else if (i == 16) {
+            SleightOfHand = b;
+        } else if (i == 17) {
+            Stealth = b;
+        } else if (i == 18) {
+            Survival = b;
+
+        }
+    }
+
     public String getName() {
         return Name;
     }
@@ -574,20 +703,17 @@ public class Character {
     public boolean getCHAThrow() {
         return CHAThrow;
     }
-    public int getProficiency(){
-        if(Level >= 0 && Level < 5){
+
+    public int getProficiency() {
+        if (Level >= 0 && Level < 5) {
             return 2;
-        }
-        else if(Level >= 5 && Level < 9){
+        } else if (Level >= 5 && Level < 9) {
             return 3;
-        }
-        else if(Level >= 9 && Level <13){
+        } else if (Level >= 9 && Level < 13) {
             return 4;
-        }
-        else if(Level >= 13 && Level <17){
+        } else if (Level >= 13 && Level < 17) {
             return 5;
-        }
-        else if(Level >= 17 && Level < 21){
+        } else if (Level >= 17 && Level < 21) {
             return 6;
         }
         return 0;
