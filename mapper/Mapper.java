@@ -1,5 +1,7 @@
 package mapper;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JTextField;
 
 
@@ -14,15 +16,12 @@ public class Mapper {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-
-        MapPanel panel = new MapPanel();
-
         JFrame frame = new JFrame("Gam3");
+        MapPanel panel = new MapPanel(frame);
         frame.getContentPane().add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         frame.pack();
         frame.setVisible(true);
-        panel.run();
+        panel.run(frame);
     }
 }
