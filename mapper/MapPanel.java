@@ -60,9 +60,6 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
     JMenu otherMenu;//menu that handles speed, initiative, ac , hp , max hp
     JMenuItem menuItem;
     Boolean WannaRepaint = false;
-    JFrame f = new JFrame("Press 'Enter' when done");
-    JTextField j = new JTextField("", 20);
-    Dimension d = new Dimension(100, 75);
 
     public MapPanel(JFrame frame) {
         this.setBackground(Color.WHITE);
@@ -436,6 +433,8 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
             repaint();
         }
         if (key == KeyEvent.VK_L) {
+            JTextField j = new JTextField("", 20);
+            Dimension d = new Dimension(100, 75);
             JFrame f = new JFrame("Load Character From File...");
             j.setText("Character Filename");
             f.setPreferredSize(d);
@@ -453,6 +452,8 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
 
         }
         if (key == KeyEvent.VK_K) {
+            JTextField j = new JTextField("", 20);
+            Dimension d = new Dimension(100, 75);
             JFrame f = new JFrame("Save Character As...");
             j.setText("Character Filename");
             f.setPreferredSize(d);
@@ -470,6 +471,9 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
         }
 
         if (key == KeyEvent.VK_I) {
+            JFrame f = new JFrame("Press 'Enter' when done");
+            JTextField j = new JTextField("", 20);
+            Dimension d = new Dimension(100, 75);
             j.setText("Set Initiative");
             f.setPreferredSize(d);
             f.getContentPane().add(j);
@@ -510,32 +514,42 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                     }
                 }
                 ////////////////////IF THIS IS CLICKED THEN SET THE STAT///////////////
+                int k = 0;
                 for (int g = 0; g < e.getActionCommand().length() - 1; g++) {//everything before ~ is important
                     if (e.getActionCommand().charAt(g) == '-') {
-                        int b = parseInt(e.getActionCommand().substring(0, g));
-                        j.setText(tolkens[selectedTolken].getCharacter().getAStatName(b));
-                        f.setPreferredSize(d);
-                        f.getContentPane().add(j);
-                        f.pack();
-                        f.setVisible(true);
-                        j.addActionListener(new ActionListener() {//the number before - dictates the stat changed
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                if (activeTolkens >= 0) {
-                                    changeStat(b, parseInt(j.getText()));
-                                    f.setVisible(false);
-                                    repaint();
-                                }
-                            }
-                        });
-
+                        k = g;
                     }
+                }
+                if (e.getActionCommand().charAt(k) == '-') {
+                    JFrame f = new JFrame("Press 'Enter' when done");
+                    JTextField j = new JTextField("", 20);
+                    Dimension d = new Dimension(100, 75);
+                    int b = parseInt(e.getActionCommand().substring(0, k));
+                    j.setText(tolkens[selectedTolken].getCharacter().getAStatName(b));
+                    f.setPreferredSize(d);
+                    f.getContentPane().add(j);
+                    f.pack();
+                    f.setVisible(true);
+                    j.addActionListener(new ActionListener() {//the number before - dictates the stat changed
+                        @Override
+                        public void actionPerformed(ActionEvent t) {
+                            if (activeTolkens >= 0) {
+                                changeStat(b, parseInt(j.getText()));
+                                f.setVisible(false);
+                                repaint();
+                            }
+                        }
+                    });
+
                 }
 
                 ////////////////////////////////IF THIS IS CLICKED INFO IS CHANGED///////////////
                 for (int g = 0; g < e.getActionCommand().length() - 1; g++) {//everything before + is important
                     if (e.getActionCommand().charAt(g) == '+') {
                         int b = parseInt(e.getActionCommand().substring(0, g));
+                        JFrame f = new JFrame("Press 'Enter' when done");
+                        JTextField j = new JTextField("", 20);
+                        Dimension d = new Dimension(100, 75);
                         j.setText(tolkens[selectedTolken].getCharacter().getASkillName(b + 27));
                         f.setPreferredSize(d);
                         f.getContentPane().add(j);
@@ -557,6 +571,9 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                 /////////////////////////IF THIS IS CLICKED THE OTHER MENU IS CHANGED/////////////
                 for (int g = 0; g < e.getActionCommand().length() - 1; g++) {//everything before + is important
                     if (e.getActionCommand().charAt(g) == '=') {
+                        JFrame f = new JFrame("Press 'Enter' when done");
+                        JTextField j = new JTextField("", 20);
+                        Dimension d = new Dimension(100, 75);
                         int b = parseInt(e.getActionCommand().substring(0, g));
                         j.setText(tolkens[selectedTolken].getCharacter().getAStatName(b + 6));
                         f.setPreferredSize(d);
@@ -567,7 +584,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 if (activeTolkens >= 0) {
-                                    tolkens[selectedTolken].getCharacter().setAStat(b+6, parseInt(j.getText()));
+                                    tolkens[selectedTolken].getCharacter().setAStat(b + 6, parseInt(j.getText()));
                                     f.setVisible(false);
                                     repaint();
                                 }
@@ -652,7 +669,7 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
     }
 
     public void addOtherStat(int s, ActionListener m) {
-        menuItem = new JMenuItem(s-6 + "=" + tolkens[selectedTolken].getCharacter().getAStatName(s) + ": "
+        menuItem = new JMenuItem(s - 6 + "=" + tolkens[selectedTolken].getCharacter().getAStatName(s) + ": "
                 + tolkens[selectedTolken].getCharacter().getAStat(s));
         menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
         menuItem.addActionListener(m);
