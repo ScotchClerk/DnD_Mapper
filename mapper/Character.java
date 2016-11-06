@@ -574,6 +574,24 @@ public class Character {
     public boolean getCHAThrow() {
         return CHAThrow;
     }
+    public int getProficiency(){
+        if(Level >= 0 && Level < 5){
+            return 2;
+        }
+        else if(Level >= 5 && Level < 9){
+            return 3;
+        }
+        else if(Level >= 9 && Level <13){
+            return 4;
+        }
+        else if(Level >= 13 && Level <17){
+            return 5;
+        }
+        else if(Level >= 17 && Level < 21){
+            return 6;
+        }
+        return 0;
+    }
 
     public void setName(String name) {
         Name = name;
