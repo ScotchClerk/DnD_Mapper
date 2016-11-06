@@ -1,10 +1,8 @@
 package mapper;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import static java.awt.PageAttributes.MediaType.C;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -21,19 +19,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
-import javax.swing.JMenuItem;
-import java.awt.event.MouseAdapter;
-import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
-import javax.swing.border.BevelBorder;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
+import java.lang.reflect.Method;
 
 /**
  * @author James Phelan and Michael Phelan
@@ -67,6 +57,9 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
     JMenu statsMenu;
     JMenuItem menuItem;
     Boolean WannaRepaint = false;
+    JFrame f = new JFrame("Press 'Enter' when done");
+    JTextField j = new JTextField("", 20);
+    Dimension d = new Dimension(100, 75);
 
     public MapPanel(JFrame frame) {
         this.setBackground(Color.WHITE);
@@ -501,10 +494,15 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Popup menu item ["
                         + e.getActionCommand() + "] was pressed.");
+
+                for (int g = 0; g < e.getActionCommand().length() - 1; g++) {//everything after = is important
+                    if (e.getActionCommand().charAt(g) == '-') {
+                        int b = parseInt(e.getActionCommand().substring(0,g));
+                        changeSkill(b, tolkens[selectedTolken].getCharacter().getASkill(b));
+                    }
+                }
+
                 char letter = e.getActionCommand().charAt(1); // the variables are named for the SECOND letter
-                JFrame f = new JFrame("Press 'Enter' when done");
-                JTextField j = new JTextField("", 20);
-                Dimension d = new Dimension(100, 75);
                 //YOLO we are doing it the long way
                 if (letter == 't') {
                     j.setText("New Strength");
@@ -610,115 +608,10 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
         skillsMenu.setMnemonic(KeyEvent.VK_A);
         skillsMenu.getAccessibleContext().setAccessibleDescription(
                 "Dropdown menu");
-        if(activeTolkens >= 0){
-        //Acrobatics
-        menuItem = new JMenuItem("Acrobatics: " + tolkens[selectedTolken].getCharacter().getAcrobatics());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //AnimalHandling
-        menuItem = new JMenuItem("AnimalHandling: " + tolkens[selectedTolken].getCharacter().getAnimalHandling());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Arcana
-        menuItem = new JMenuItem("Arcana: " + tolkens[selectedTolken].getCharacter().getArcana());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Athletics
-        menuItem = new JMenuItem("Athletics: " + tolkens[selectedTolken].getCharacter().getAthletics());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Deception
-        menuItem = new JMenuItem("Deception: " + tolkens[selectedTolken].getCharacter().getDeception());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //History
-        menuItem = new JMenuItem("History: " + tolkens[selectedTolken].getCharacter().getHistory());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_6, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Insight
-        menuItem = new JMenuItem("Insight: " + tolkens[selectedTolken].getCharacter().getInsight());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_7, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Intimidation
-        menuItem = new JMenuItem("Intimidation: " + tolkens[selectedTolken].getCharacter().getIntimidation());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_8, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Investigation
-        menuItem = new JMenuItem("Investigation: " + tolkens[selectedTolken].getCharacter().getInvestigation());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_9, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Medicine
-        menuItem = new JMenuItem("Medicine: " + tolkens[selectedTolken].getCharacter().getMedicine());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Nature
-        menuItem = new JMenuItem("Nature: " + tolkens[selectedTolken].getCharacter().getNature());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Perception
-        menuItem = new JMenuItem("Perception: " + tolkens[selectedTolken].getCharacter().getPerception());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Performance
-        menuItem = new JMenuItem("Performance: " + tolkens[selectedTolken].getCharacter().getPerformance());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Persuasion
-        menuItem = new JMenuItem("Persuasion: " + tolkens[selectedTolken].getCharacter().getPersuasion());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Religion
-        menuItem = new JMenuItem("Religion: " + tolkens[selectedTolken].getCharacter().getReligion());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //SleightOfHand
-        menuItem = new JMenuItem("SleightOfHand: " + tolkens[selectedTolken].getCharacter().getSleightOfHand());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Stealth
-        menuItem = new JMenuItem("Stealth: " + tolkens[selectedTolken].getCharacter().getStealth());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
-        //Survival
-        menuItem = new JMenuItem("Survival: " + tolkens[selectedTolken].getCharacter().getSurvival());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
-        menuItem.addActionListener(menuListener);
-        skillsMenu.add(menuItem);
+        if (activeTolkens >= 0) {
+            for (int n = 1; n <= 18; n++) {
+                addSkill(n, menuListener);
+            }
         }
         ///////////////////////////BUILDS THE STATS MENU///////////////////
         statsMenu = new JMenu("Stats");
@@ -768,23 +661,35 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
         menuBar.add(skillsMenu);
         menuBar.add(statsMenu);
     }
-    public void addSkill(String s, ActionListener m){
-        String d = "get"+s;
-        menuItem = new JMenuItem(s+": " + tolkens[selectedTolken].getCharacter().getAcrobatics());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+
+    public void addSkill(int s, ActionListener m) {
+        menuItem = new JMenuItem(s + "-" + tolkens[selectedTolken].getCharacter().getASkillName(s) + ": "
+                + tolkens[selectedTolken].getCharacter().getASkill(s));
         menuItem.getAccessibleContext().setAccessibleDescription("Nothing");
         menuItem.addActionListener(m);
         skillsMenu.add(menuItem);
+
+    }
+
+    public void changeSkill(int s, boolean b) {
+        if (b) {
+            tolkens[selectedTolken].getCharacter().setASkill(s, false);
+        } else {
+            tolkens[selectedTolken].getCharacter().setASkill(s, true);
+        }
+        repaint();
     }
 
     @Override
-    public void keyReleased(KeyEvent ke) {
+    public void keyReleased(KeyEvent ke
+    ) {
         int key = ke.getKeyCode();
 
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e
+    ) {
 
     }
 
@@ -908,11 +813,13 @@ public class MapPanel extends JPanel implements KeyListener, MouseListener {
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e
+    ) {
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e
+    ) {
 
     }
 
