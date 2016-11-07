@@ -431,6 +431,18 @@ public class Character {
                 return WIS;
             case 6:
                 return CHA;
+            case 7:
+                return speed;
+            case 8:
+                return AC;
+            case 9:
+                return initiative;
+            case 10:
+                return Level;
+            case 11:
+                return CurrentHP;
+            case 12:
+                return MaxHP;
             default:
                 break;
         }
@@ -451,6 +463,18 @@ public class Character {
                 return "Wisdom";
             case 6:
                 return "Charisma";
+            case 7:
+                return "Speed";
+            case 8:
+                return "AC";
+            case 9:
+                return "Initiative";
+            case 10:
+                return "Level";
+            case 11:
+                return "Current HP";
+            case 12:
+                return "Max HP";
             default:
                 break;
         }
@@ -470,7 +494,20 @@ public class Character {
             WIS = j;
         } else if (i == 6) {
             CHA = j;
+        } else if (i == 7) {
+            speed = j;
+        } else if (i == 8) {
+            AC = j;
+        } else if (i == 9) {
+            initiative = j;
+        } else if (i == 10) {
+            Level = j;
+        } else if (i == 11) {
+            CurrentHP = j;
+        } else if (i == 12) {
+            MaxHP = j;
         }
+
     }
 
     public boolean getASkill(int i) {
@@ -578,8 +615,31 @@ public class Character {
                 return "Wis throw";
             case 24:
                 return "Cha throw";
+            case 25:
+                return Name;
+            case 26:
+                return Class;
+            case 27:
+                return Race;
+            case 28:
+                return "Name";
+            case 29:
+                return "Class";
+            case 30:
+                return "Race";
             default:
                 return "false";
+        }
+    }
+
+    public void setInfo(int i, String s) {
+        String t = s;
+        if (i == 1) {
+            Name = t;
+        } else if (i == 2) {
+            Class = t;
+        } else if (i == 3) {
+            Race = t;
         }
     }
 
